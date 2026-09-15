@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Villa — Ready Wear for Women</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f0e9;
+    --panel:#e9e1d5;
+    --ink:#2f2b27;
+    --white:#fffdf9;
+    --stone:#746d63;
+    --stone-dim:#9a9287;
+    --line: rgba(47,43,39,0.14);
+    --line-strong: rgba(47,43,39,0.28);
+    --ink-on-panel:#2f2b27;
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  ::selection{ background:#ded4c5; color:#2f2b27; }
+
+  :focus-visible{
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  section, header{ scroll-margin-top: 84px; }
+
+  .wrap{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding-inline: clamp(1.25rem, 5vw, 3rem);
+  }
+
+  h1,h2,h3{
+    font-family:var(--serif);
+    font-weight:500;
+    margin:0;
+    letter-spacing:.01em;
+  }
+  p{ margin:0; }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+    font-family:var(--sans);
+    font-size:.92rem;
+    letter-spacing:.04em;
+    padding: .85rem 1.9rem;
+    border:1px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+    text-decoration:none;
+    cursor:pointer;
+    transition: background .35s ease, color .35s ease;
+  }
+  .btn:hover{ background:#ded4c5; color:#2f2b27; }
+  .btn.solid{ background:#ded4c5; color:#2f2b27; }
+  .btn.solid:hover{ background:transparent; color:var(--ink); }
+  .btn.ghost-dark{ border-color: rgba(11,11,10,0.7); color:var(--ink-on-panel); }
+  .btn.ghost-dark:hover{ background:var(--ink-on-panel); color:var(--white); }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background: rgba(244,240,233,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block: .9rem;
+  }
+  .brand-mark{ display:flex; align-items:center; gap:.7rem; text-decoration:none; color:var(--ink); }
+  .brand-mark svg{ width:38px; height:38px; }
+  .brand-mark 
+  .wordmark{display:flex;align-items:center;gap:.65rem;font-weight:700;letter-spacing:.02em;}
+  .mv-logo{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border:2px solid #f7f4ee;border-radius:50%;font-family:Georgia,serif;font-size:1rem;font-weight:700;letter-spacing:-.08em;}
+  nav ul li a{font-weight:400;letter-spacing:.02em;}
+
+
+  nav ul{
+    list-style:none; display:flex; gap:clamp(1rem,2.4vw,2.4rem);
+    margin:0; padding:0;
+  }
+  nav a{
+    text-decoration:none;
+    font-size:.92rem;
+    letter-spacing:.02em;
+    color:var(--ink);
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease;
+  }
+  nav a:hover{ border-color: var(--ink); }
+
+  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:''; display:block; width:24px; height:1px; background:var(--ink);
+    position:relative; transition:.3s;
+  }
+  .nav-toggle span::before{ position:absolute; top:-7px; }
+  .nav-toggle span::after{ position:absolute; top:7px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--bg);
+    padding-block: clamp(3.5rem, 10vw, 7rem) clamp(3rem, 8vw, 6rem);
+    text-align:center;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    font-family:var(--serif); font-style:italic; font-size:1.05rem;
+    color:var(--stone);
+    opacity:0; animation: rise .9s .1s ease forwards;
+  }
+  .hero h1{
+    font-size: clamp(3.2rem, 9vw, 7.8rem);
+    line-height:.98;
+    margin-block: .6rem .9rem;
+    opacity:0; animation: rise 1s .25s ease forwards;
+  }
+  .hero h1 em{ font-style:italic; font-weight:400; }
+  .hero-sub{
+    max-width:38ch; margin-inline:auto;
+    font-size:1.05rem; color:var(--stone);
+    opacity:0; animation: rise .9s .45s ease forwards;
+  }
+  .hero-cta{
+    margin-top:2.1rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+    opacity:0; animation: rise .9s .6s ease forwards;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){
+    .hero-eyebrow,.hero h1,.hero-sub,.hero-cta{ animation:none; opacity:1; }
+    html{ scroll-behavior:auto; }
+  }
+
+  .hero-frame{
+    position:absolute; inset: clamp(1rem,3vw,2.2rem);
+    border:1px solid var(--line);
+    pointer-events:none;
+  }
+
+  /* ---------- TRUST BAR ---------- */
+  .trust-bar{
+    border-bottom:1px solid var(--line);
+    padding-block: 1.4rem;
+  }
+  .trust-bar ul{
+    list-style:none; margin:0; padding:0;
+    display:flex; flex-wrap:wrap; justify-content:center; gap: 0;
+    font-size:.82rem; letter-spacing:.03em; color:var(--stone);
+  }
+  .trust-bar li{
+    padding-inline: 1.5rem;
+    border-right:1px solid var(--line);
+    display:flex; align-items:center; gap:.5rem;
+  }
+  .trust-bar li:last-child{ border-right:none; }
+  .trust-bar svg{ width:15px; height:15px; flex-shrink:0; }
+
+  /* ---------- QUOTE STRIP (light break) ---------- */
+  .quote-strip{
+    background:#ded4c5; color:#2f2b27;
+    padding-block: clamp(3rem,7vw,5rem);
+    text-align:center;
+  }
+  .quote-strip blockquote{
+    font-family:var(--serif); font-style:italic; font-weight:400;
+    font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+    max-width:26ch; margin: 0 auto; line-height:1.35;
+  }
+  .quote-strip cite{
+    display:block; margin-top:1.2rem; font-family:var(--sans);
+    font-style:normal; font-size:.82rem; letter-spacing:.08em; color:var(--stone-dim);
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:2rem; margin-bottom: clamp(2rem,5vw,3.4rem);
+    border-bottom:1px solid var(--line); padding-bottom:1.4rem;
+    flex-wrap:wrap;
+  }
+  .section-head h2{ font-size: clamp(2.1rem, 4.6vw, 3.3rem); }
+  .section-head p{ max-width:34ch; color:var(--stone); font-size:.95rem; }
+  section{ padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+  section#collections{ border-bottom:1px solid var(--line); }
+
+  /* ---------- COLLECTIONS (light cards on dark ground) ---------- */
+  .coll-grid{
+    display:grid;
+    grid-template-columns: 1.15fr 1fr 1fr;
+    gap: clamp(1.2rem,2.5vw,2rem);
+  }
+  .coll-card{
+    border:1px solid var(--line-strong);
+    padding: clamp(1.6rem,2.6vw,2.2rem);
+    display:flex; flex-direction:column; gap:1.4rem;
+    background: var(--white);
+    color: var(--ink-on-panel);
+  }
+  .coll-card.tall{ grid-row: span 2; }
+  .coll-figure{
+    aspect-ratio: 3/4; border:1px solid rgba(11,11,10,0.14);
+    display:flex; align-items:center; justify-content:center;
+    background:#f1eadf;
+  }
+  .coll-card.tall .coll-figure{ aspect-ratio: 3/5; }
+  .coll-figure svg{ width:62%; height:auto; }
+  .coll-card h3{ font-size:1.6rem; }
+  .coll-card .tag{ font-size:.78rem; letter-spacing:.06em; color:var(--stone-dim); }
+  .coll-card .desc{ font-size:.93rem; color:#514c43; flex-grow:1; }
+  .coll-card .link{
+    font-size:.85rem; text-decoration:none; color:var(--ink-on-panel);
+    border-bottom:1px solid var(--ink-on-panel); align-self:flex-start; padding-bottom:2px;
+  }
+
+  /* ---------- MEASUREMENTS ---------- */
+  #measure{ border-bottom:1px solid var(--line); }
+  .measure-panel{
+    background:var(--white); color:var(--ink-on-panel);
+    border:1px solid var(--line-strong);
+    padding: clamp(1.6rem,3.5vw,3rem);
+  }
+  .measure-grid{
+    display:grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem,5vw,4rem);
+    align-items:start;
+  }
+  .measure-diagram{
+    border:1px solid rgba(11,11,10,0.14); padding: 2rem;
+    display:flex; align-items:center; justify-content:center;
+    background: #f7f4ee;
+  }
+  .measure-diagram svg{ width:100%; max-width:280px; height:auto; }
+
+  .measure-list{ list-style:none; margin:0 0 2rem; padding:0; display:grid; gap:1.1rem; }
+  .measure-list li{ display:grid; grid-template-columns: 2.1rem 1fr; gap:1rem; align-items:baseline; }
+  .measure-list .letter{
+    font-family:var(--serif); font-style:italic; font-size:1.3rem; color:var(--stone-dim);
+  }
+  .measure-list strong{ font-weight:500; }
+  .measure-list span.desc{ display:block; color:#514c43; font-size:.9rem; margin-top:.15rem; }
+
+  .measure-tip{
+    font-size:.85rem; color:#514c43; margin-top:1rem;
+    padding-top:1rem; border-top:1px solid rgba(11,11,10,0.12);
+  }
+
+  table{ width:100%; border-collapse:collapse; font-size:.88rem; }
+  caption{ text-align:left; font-family:var(--serif); font-size:1.3rem; margin-bottom:1rem; font-weight:500; }
+  th,td{ border:1px solid rgba(11,11,10,0.14); padding:.6rem .7rem; text-align:center; }
+  th{ font-weight:500; background:#fffdf9; }
+  td:first-child, th:first-child{ text-align:left; font-weight:500; }
+  tbody tr:nth-child(even){ background: rgba(11,11,10,0.03); }
+
+  .chart-tables{ display:grid; gap:1.8rem; margin-bottom:1.6rem; }
+
+  .fit-help{
+    margin-top: 2.4rem;
+    padding-top: 2.2rem;
+    border-top:1px solid rgba(11,11,10,0.14);
+    display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap;
+  }
+  .fit-help h4{ font-family:var(--serif); font-weight:500; font-size:1.3rem; margin-bottom:.35rem; }
+  .fit-help p{ font-size:.9rem; color:#514c43; max-width:42ch; }
+
+  /* ---------- ABOUT / PROFILE ---------- */
+  #about{ background:#e9e1d5; }
+  .about-grid{
+    display:grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem,5vw,4rem);
+  }
+  .about-copy p{ margin-bottom:1.2rem; color: var(--stone); font-size:1rem; }
+  .about-copy p:last-child{ margin-bottom:0; }
+
+  .profile-card{
+    border:1px solid var(--line-strong);
+    padding: clamp(1.6rem,2.6vw,2.2rem);
+  }
+  .profile-card h3{ font-size:1.5rem; color:var(--ink); margin-bottom:1rem; }
+  .profile-card dl{ margin:0; display:grid; gap:.9rem; }
+  .profile-card dt{ font-size:.78rem; letter-spacing:.06em; color:var(--stone); }
+  .profile-card dd{ margin:.15rem 0 0; font-size:.98rem; }
+  .profile-card .rule{ border:none; border-top:1px solid var(--line); margin:1.4rem 0; }
+
+  /* ---------- SECOND QUOTE ---------- */
+  .quote-inline{
+    padding-block: clamp(3rem,6vw,4.5rem); text-align:center; border-bottom:1px solid var(--line);
+  }
+  .quote-inline blockquote{
+    font-family:var(--serif); font-style:italic; font-size: clamp(1.3rem,2.6vw,1.9rem);
+    max-width:32ch; margin:0 auto; color:var(--ink);
+  }
+  .quote-inline .rule-line{ width:44px; height:1px; background:var(--ink); margin: 1.4rem auto; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{ padding-block: clamp(3rem,6vw,4.5rem) 2rem; }
+  .footer-grid{
+    display:grid; grid-template-columns: 1.2fr .8fr .8fr 1.1fr; gap: clamp(1.6rem,3vw,3rem);
+    padding-bottom: 3rem; border-bottom:1px solid var(--line);
+  }
+  .footer-brand svg{ width:44px; height:44px; margin-bottom:1rem; }
+  .footer-brand p{ font-size:.9rem; color:var(--stone); max-width:28ch; }
+  footer h4{ font-family:var(--sans); font-weight:500; font-size:.85rem; letter-spacing:.04em; margin-bottom:1rem; color:var(--ink); }
+  footer ul{ list-style:none; margin:0; padding:0; display:grid; gap:.6rem; }
+  footer a{ text-decoration:none; font-size:.9rem; color:var(--stone); }
+  footer a:hover{ color:var(--ink); }
+
+  .newsletter{ display:flex; border:1px solid var(--ink); max-width:320px; }
+  .newsletter input{
+    border:none; background:transparent; padding:.75rem .9rem; flex-grow:1; font-family:var(--sans);
+    font-size:.9rem; color:var(--ink); min-width:0;
+  }
+  .newsletter input::placeholder{ color: var(--stone-dim); }
+  .newsletter input:focus{ outline:none; }
+  .newsletter button{
+    border:none; background:#ded4c5; color:#2f2b27; padding:.75rem 1.1rem; cursor:pointer;
+    font-family:var(--sans); font-size:.85rem;
+  }
+
+  .bottom-row{
+    display:flex; justify-content:space-between; align-items:center; padding-top:1.6rem;
+    font-size:.8rem; color:var(--stone-dim); flex-wrap:wrap; gap:.8rem;
+  }
+  .social-row{ display:flex; gap:1rem; }
+  .social-row a{ display:flex; }
+  .social-row svg{ width:18px; height:18px; }
+  .photo > span,
+  .photo iframe{
+    max-width:100% !important;
+  }
+  .photo a{
+    width:100%;
+    min-height:360px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111;
+    text-decoration:none;
+  }
+  .photo a::before{
+    content:"View fashion inspiration on Unsplash ↗";
+    border:1px solid rgba(11,11,10,.2);
+    padding:.8rem 1rem;
+    font-size:.78rem;
+    letter-spacing:.04em;
+    color:#514c43;
+  }
+
+  /* ---------- SHOPPING EXPERIENCE ---------- */
+  .shop-tools{
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    gap:.8rem;
+    margin-bottom:1.5rem;
+  }
+  .search-box,.filter-select{
+    background:var(--panel);
+    color:var(--ink);
+    border:1px solid var(--line-strong);
+    padding:.9rem 1rem;
+    font:inherit;
+    outline:none;
+  }
+  .search-box:focus,.filter-select:focus{border-color:var(--ink);}
+  .shop-count{color:var(--stone); font-size:.85rem; align-self:center;}
+  .product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1rem;
+  }
+  .product-card{
+    background:var(--white);
+    color:var(--ink-on-panel);
+    border:1px solid rgba(11,11,10,.14);
+    overflow:hidden;
+    position:relative;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .product-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(0,0,0,.18);
+  }
+  .product-image{
+    position:relative;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+    aspect-ratio:4/5;
+    overflow:hidden;
+    background:#eee7dc;
+  }
+  .product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .product-card:hover .product-image img{transform:scale(1.04);}
+  .photo-label{position:absolute;left:.65rem;bottom:.65rem;background:rgba(255,255,255,.88);color:#111;padding:.3rem .55rem;font-size:.68rem;letter-spacing:.04em;z-index:2;}
+  .wish-btn{
+    position:absolute;
+    right:.65rem;
+    top:.65rem;
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.94);
+    cursor:pointer;
+    font-size:1.15rem;
+    z-index:3;
+  }
+  .product-info{padding:1rem;}
+  .product-meta{
+    display:flex;
+    justify-content:space-between;
+    gap:.5rem;
+    color:#716b61;
+    font-size:.72rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .product-info h3{
+    font-family:var(--serif);
+    font-size:1.35rem;
+    margin:.35rem 0;
+  }
+  .product-desc{font-size:.82rem;color:#5d584f;min-height:2.6em;}
+  .price-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:.5rem;
+    margin-top:.9rem;
+  }
+  .price{font-weight:600;font-size:.98rem;}
+  .old-price{text-decoration:line-through;color:#999;margin-left:.3rem;font-weight:400;}
+  .add-btn{
+    border:1px solid #111;
+    background:#3b3630;
+    color:#fffdf9;
+    padding:.62rem .8rem;
+    cursor:pointer;
+    font:inherit;
+    font-size:.78rem;
+  }
+  .add-btn:hover{background:transparent;color:#111;}
+  .badge{
+    position:absolute;
+    left:.65rem;
+    top:.65rem;
+    background:#3b3630;
+    color:#fffdf9;
+    padding:.35rem .55rem;
+    font-size:.68rem;
+    letter-spacing:.04em;
+    z-index:2;
+  }
+  .empty-state{
+    display:none;
+    padding:3rem 1rem;
+    text-align:center;
+    border:1px dashed var(--line-strong);
+    color:var(--stone);
+    grid-column:1/-1;
+  }
+  .cart-panel{
+    position:fixed;
+    top:0;
+    right:0;
+    width:min(410px,100%);
+    height:100vh;
+    background:#fffdf9;
+    color:#111;
+    z-index:100;
+    transform:translateX(105%);
+    transition:transform .35s ease;
+    box-shadow:-20px 0 50px rgba(0,0,0,.25);
+    padding:1.4rem;
+    display:flex;
+    flex-direction:column;
+  }
+  .cart-panel.open{transform:translateX(0);}
+  .cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ccc;padding-bottom:1rem;}
+  .cart-head h3{font-size:1.8rem;}
+  .cart-close{border:0;background:none;font-size:1.5rem;cursor:pointer;}
+  .cart-items{flex:1;overflow:auto;padding:1rem 0;}
+  .cart-item{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid #ddd;padding:.9rem 0;}
+  .cart-item small{display:block;color:#777;margin-top:.2rem;}
+  .cart-remove{border:0;background:none;text-decoration:underline;cursor:pointer;font:inherit;font-size:.78rem;}
+  .cart-footer{border-top:1px solid #ccc;padding-top:1rem;}
+  .cart-total{display:flex;justify-content:space-between;font-weight:600;margin-bottom:1rem;}
+  .cart-backdrop{
+    position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:90;
+    opacity:0;pointer-events:none;transition:.25s;
+  }
+  .cart-backdrop.open{opacity:1;pointer-events:auto;}
+  .cart-empty{text-align:center;color:#777;padding:3rem 0;}
+  .shop-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem;}
+  .shop-actions .btn{font-size:.78rem;padding:.65rem 1rem;}
+  .collection-intro{
+    display:flex;justify-content:space-between;gap:2rem;align-items:end;
+    margin-bottom:2rem;flex-wrap:wrap;
+  }
+  .collection-intro p{max-width:55ch;color:var(--stone);}
+  .cart-trigger{
+    position:relative;
+    border:1px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+    padding:.65rem 1rem;
+    cursor:pointer;
+    font:inherit;
+  }
+  .cart-trigger:hover{background:var(--ink);color:var(--bg);}
+  .cart-number{
+    display:inline-flex;
+    min-width:20px;height:20px;
+    border-radius:50%;
+    align-items:center;justify-content:center;
+    background:var(--ink);color:var(--bg);
+    font-size:.7rem;margin-left:.35rem;
+  }
+  @media(max-width:1050px){.product-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:760px){
+    .shop-tools{grid-template-columns:1fr 1fr;}
+    .shop-count{grid-column:1/-1;}
+    .product-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:520px){
+    .product-grid{grid-template-columns:1fr;}
+    .shop-tools{grid-template-columns:1fr;}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .coll-grid{ grid-template-columns: 1fr 1fr; }
+    .coll-card.tall{ grid-row: auto; }
+    .measure-grid{ grid-template-columns: 1fr; }
+    .about-grid{ grid-template-columns: 1fr; }
+    .footer-grid{ grid-template-columns: 1fr 1fr; }
+    .trust-bar li{ padding-inline: 1rem; }
+  }
+  @media (max-width: 640px){
+    nav ul{
+      position:fixed; inset: 62px 0 auto 0; background:var(--bg);
+      flex-direction:column; padding: 1.5rem clamp(1.25rem,5vw,3rem);
+      border-bottom:1px solid var(--line);
+      transform: translateY(-120%); transition: transform .35s ease;
+    }
+    nav ul.open{ transform: translateY(0); }
+    .nav-toggle{ display:block; }
+    .coll-grid{ grid-template-columns: 1fr; }
+    .footer-grid{ grid-template-columns: 1fr; gap:2rem; }
+    .trust-bar li{ border-right:none; padding-block:.3rem; width:100%; justify-content:center; }
+    .fit-help{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#top" class="brand-mark">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M9 46V27C9 16.5066 17.5066 8 28 8H32C42.4934 8 51 16.5066 51 27V46" stroke="#f7f4ee" stroke-width="1.4"/>
+        <line x1="9" y1="46" x2="51" y2="46" stroke="#f7f4ee" stroke-width="1.4"/>
+        <text x="30" y="40" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="19" fill="#f7f4ee">MV</text>
+      </svg>
+      <span class="wordmark"><span class="mv-logo">MV</span><span>Modern Villa</span></span>
+    </a>
+    <nav>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle"><span></span></button>
+      <ul id="navList">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#collections">Shop</a></li>
+        <li><a href="#measure">Size Guide</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-frame"></div>
+    <div class="wrap">
+      <p class="hero-eyebrow">Ready-to-wear, made to feel tailored</p>
+      <h1>Modern <em>Villa</em></h1>
+      <p class="hero-sub">Suits for your functions, nightsuits for your evenings, cord sets for everything in between — all ready to wear, all made to move with you.</p>
+      <div class="hero-cta">
+        <a href="#collections" class="btn solid">View the collection</a>
+        <a href="#measure" class="btn">Find your size</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="wrap">
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 7 9 18l-5-5"/></svg> Handpicked fabrics</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg> Ships in 24–48 hrs</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg> 7-day easy exchange</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M4 8h16M6 8l-2 6a4 4 0 0 0 8 0l-2-6M20 8l-2 6a4 4 0 0 0 8 0l-2-6" transform="scale(0.85) translate(2,1)"/></svg> Custom length on request</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-strip">
+    <div class="wrap">
+      <blockquote>A woman who moves with ease, moves with confidence.</blockquote>
+      <cite>Modern Villa</cite>
+    </div>
+  </div>
+
+  <!-- SHOPPING COLLECTIONS -->
+  <section id="collections">
+    <div class="wrap">
+      <div class="collection-intro">
+        <div>
+          <div class="section-head" style="margin-bottom:1rem;">
+            <h2>Shop the collection</h2>
+            <p>Modern Indian womenswear for functions, slow mornings and every stylish day in between.</p>
+          </div>
+        </div>
+        <button class="cart-trigger" id="cartTrigger">Bag <span class="cart-number" id="cartCount">0</span></button>
+      </div>
+
+      <div class="shop-tools">
+        <input class="search-box" id="productSearch" type="search" placeholder="Search suits, cord sets, nightsuits...">
+        <select class="filter-select" id="categoryFilter" aria-label="Filter by category">
+          <option value="all">All collections</option>
+          <option value="suits">Suits</option>
+          <option value="cord">Cord Sets</option>
+          <option value="night">Nightsuits</option>
+          <option value="festive">Festive</option>
+        </select>
+        <div class="shop-count" id="shopCount">8 pieces</div>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+
+        <article class="product-card" data-category="suits festive" data-name="maroon embroidered anarkali suit">
+          <div class="product-image">
+            <span class="badge">BESTSELLER</span>
+            <button class="wish-btn" aria-label="Add Maroon Anarkali to wishlist">♡</button>
+            <img src="https://images.unsplash.com/photo-1769063382706-8156b3b33eac?auto=format&fit=crop&q=85&w=1000" alt="Traditional Indian printed kurta set" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-meta"><span>Occasion Wear</span><span>S–XXL</span></div>
+            <h3>Maroon Embroidered Suit</h3>
+            <p class="product-desc">Rich festive kurta set with traditional embroidery and an easy straight silhouette.</p>
+            <div class="price-row"><span class="price">₹2,499</span><button class="add-btn" data-product="Maroon Embroidered Suit" data-price="2499">Add to bag</button></div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="cord" data-name="primrose yellow floral cord set">
+          <div class="product-image">
+            <span class="badge">NEW</span>
+            <button class="wish-btn" aria-label="Add Primrose Cord Set to wishlist">♡</button>
+            <img src="https://images.unsplash.com/photo-1766471524296-1bff3675c3dd?auto=format&fit=crop&q=85&w=1000" alt="Patterned tunic with wide-leg pants co-ord set" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-meta"><span>Cord Set</span><span>S–XL</span></div>
+            <h3>Primrose Floral Cord Set</h3>
+            <p class="product-desc">Bright floral two-piece set made for travel days, brunches and relaxed weekends.</p>
+            <div class="price-row"><span class="price">₹1,899</span><button class="add-btn" data-product="Primrose Floral Cord Set" data-price="1899">Add to bag</button></div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="night" data-name="yellow printed nightsuit">
+          <div class="product-image">
+            <button class="wish-btn" aria-label="Add Yellow Nightsuit to wishlist">♡</button>
+            <img src="https://images.unsplash.com/photo-1768221677512-896e1d816eaa?auto=format&fit=crop&q=85&w=1000" alt="Patterned pajama set for comfortable evenings" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-meta"><span>After Hours</span><span>S–XXL</span></div>
+            <h3>Sunflower Printed Nightsuit</h3>
+            <p class="product-desc">Soft-looking printed two-piece set with a relaxed fit for comfortable evenings at home.</p>
+            <div class="price-row"><span class="price">₹1,299</span><button class="add-btn" data-product="Sunflower Printed Nightsuit" data-price="1299">Add to bag</button></div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="suits festive" data-name="rust floral salwar kameez suit">
+          <div class="product-image">
+            <span class="badge">FESTIVE</span>
+            <button class="wish-btn" aria-label="Add Rust Floral Suit to wishlist">♡</button>
+            <img src="https://images.unsplash.com/photo-1743229995753-69be4b438204?auto=format&fit=crop&q=85&w=1000" alt="Floral Indian suit with dupatta" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-meta"><span>Traditional</span><span>S–XXL</span></div>
+            <h3>Rust Floral Salwar Suit</h3>
+            <p class="product-desc">Warm rust kurta, matching dupatta and delicate floral detailing for festive gatherings.</p>
+            <div class="price-row"><span class="price">₹2,299</span><button class="add-btn" data-product="Rust Floral Salwar Suit" data-price="2299">Add to bag</button></div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="cord" data-name="off white floral coord set">
+          <div class="product-image">
+            <button class="wish-btn" aria-label="Add Off White Cord Set to wishlist">♡</button>
+            <img src="https://images.unsplash.com/photo-1767687700430-d1b2997ae598?auto=format&fit=crop&q=85&w=1000" alt="Floral co-ord outfit near plants" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-meta"><span>Cord Set</span><span>S–XL</span></div>
+            <h3>Ivory Garden Cord Set</h3>
+            <p class="product-desc">Elegant floral co-ord with a soft neutral base for an elevated everyday wardrobe.</p>
+            <div class="price-row"><span class="price">₹1,999</span><button class="add-btn" data-product="Ivory Garden Cord Set" data-price="1999">Add to bag</button></div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="night" data-name="red printed cotton nightsuit">
+          <div class="product-image">
+            <button class="wish-btn" aria-label="Add Red Cotton Nightsuit to wishlist">♡</button>
+            <img src="https://images.unsplash.com/photo-1764337593581-aeff42c68165?auto=format&fit=crop&q=85&w=1000" alt="Pink and red printed pajama set" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-meta"><span>Cotton Edit</span><span>S–XXL</span></div>
+            <h3>Ruby Printed Nightsuit</h3>
+            <p class="product-desc">Printed cotton-inspired set with a relaxed top and matching bottoms for home comfort.</p>
+            <div class="price-row"><span class="price">₹1,199</span><button class="add-btn" data-product="Ruby Printed Nightsuit" data-price="1199">Add to bag</button></div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="festive suits" data-name="mustard ethnic anarkali suit">
+          <div class="product-image">
+            <span class="badge">LIMITED</span>
+            <button class="wish-btn" aria-label="Add Mustard Ethnic Suit to wishlist">♡</button>
+            <img src="https://images.unsplash.com/photo-1763558966748-f56b4d0fb104?auto=format&fit=crop&q=85&w=1000" alt="Floral modern Indian outfit with wide-leg pants" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-meta"><span>Festive</span><span>S–XXL</span></div>
+            <h3>Mustard Heritage Suit</h3>
+            <p class="product-desc">Statement ethnic silhouette with a graceful dupatta for festive dinners and family functions.</p>
+            <div class="price-row"><span class="price">₹2,799</span><button class="add-btn" data-product="Mustard Heritage Suit" data-price="2799">Add to bag</button></div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="festive" data-name="teal printed festive dress">
+          <div class="product-image">
+            <button class="wish-btn" aria-label="Add Teal Festive Set to wishlist">♡</button>
+            <img src="https://images.unsplash.com/photo-1769063382706-8156b3b33eac?auto=format&fit=crop&q=85&w=1000" alt="Colorful patterned Indian kurta set" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-meta"><span>Festive Edit</span><span>S–XL</span></div>
+            <h3>Teal Celebration Set</h3>
+            <p class="product-desc">Jewel-toned festive look inspired by contemporary Indian occasion dressing.</p>
+            <div class="price-row"><span class="price">₹2,599</span><button class="add-btn" data-product="Teal Celebration Set" data-price="2599">Add to bag</button></div>
+          </div>
+        </article>
+
+        <div class="empty-state" id="emptyState">No pieces match your search. Try “suit”, “cord” or “night”.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CART DRAWER -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-panel" id="cartPanel" aria-label="Shopping bag">
+    <div class="cart-head">
+      <h3>Your Bag</h3>
+      <button class="cart-close" id="cartClose" aria-label="Close shopping bag">×</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">Your bag is empty.<br>Find something you love.</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total</span><span id="cartTotal">₹0</span></div>
+      <button class="btn solid" style="width:100%;justify-content:center;" id="checkoutBtn">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <!-- MEASUREMENTS -->
+  <section id="measure">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Find your size</h2>
+        <p>Every ready-made piece is cut to this chart. Measure over light clothing and keep the tape snug, not tight.</p>
+      </div>
+
+      <div class="measure-panel">
+        <div class="measure-grid">
+          <div>
+            <div class="measure-diagram">
+              <svg viewBox="0 0 200 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <ellipse cx="100" cy="30" rx="18" ry="20" stroke="#0b0b0a" stroke-width="1.2"/>
+                <path d="M100 50v20M60 75c10-8 30-12 40-12s30 4 40 12l8 40-16 6-6-30-6 16v130H86V147l-6-16-6 30-16-6z" stroke="#0b0b0a" stroke-width="1.2" stroke-linejoin="round"/>
+                <line x1="68" y1="74" x2="132" y2="74" stroke="#0b0b0a" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <text x="140" y="78" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="#0b0b0a">A</text>
+                <line x1="58" y1="105" x2="142" y2="105" stroke="#0b0b0a" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <text x="150" y="109" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="#0b0b0a">B</text>
+                <line x1="62" y1="150" x2="138" y2="150" stroke="#0b0b0a" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <text x="146" y="154" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="#0b0b0a">C</text>
+                <line x1="56" y1="185" x2="144" y2="185" stroke="#0b0b0a" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <text x="152" y="189" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="#0b0b0a">D</text>
+                <line x1="30" y1="74" x2="30" y2="300" stroke="#0b0b0a" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <text x="14" y="190" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="#0b0b0a">E</text>
+              </svg>
+            </div>
+            <ul class="measure-list" style="margin-top:1.6rem;">
+              <li>
+                <span class="letter">A</span>
+                <div><strong>Shoulder</strong><span class="desc">Straight across the back, from one shoulder edge to the other.</span></div>
+              </li>
+              <li>
+                <span class="letter">B</span>
+                <div><strong>Bust</strong><span class="desc">Around the fullest part of the chest, tape parallel to the floor.</span></div>
+              </li>
+              <li>
+                <span class="letter">C</span>
+                <div><strong>Waist</strong><span class="desc">Around the natural waistline, just above the navel.</span></div>
+              </li>
+              <li>
+                <span class="letter">D</span>
+                <div><strong>Hip</strong><span class="desc">Around the fullest part of the hips, roughly 8" below the waist.</span></div>
+              </li>
+              <li>
+                <span class="letter">E</span>
+                <div><strong>Length</strong><span class="desc">From the shoulder point straight down to where you want the hem to fall.</span></div>
+              </li>
+            </ul>
+            <p class="measure-tip">Tip: measure with a soft tape, stand naturally, and take numbers over light clothing rather than bulky layers — it's the easiest way to avoid a returned order.</p>
+          </div>
+
+          <div>
+            <div class="chart-tables">
+              <table>
+                <caption>Size chart (inches)</caption>
+                <thead>
+                  <tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hip</th><th>Shoulder</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>S</td><td>34</td><td>28</td><td>36</td><td>13.5</td></tr>
+                  <tr><td>M</td><td>36</td><td>30</td><td>38</td><td>14</td></tr>
+                  <tr><td>L</td><td>38</td><td>32</td><td>40</td><td>14.5</td></tr>
+                  <tr><td>XL</td><td>40</td><td>34</td><td>42</td><td>15</td></tr>
+                  <tr><td>XXL</td><td>42</td><td>36</td><td>44</td><td>15.5</td></tr>
+                </tbody>
+              </table>
+
+              <table>
+                <caption>Size conversion</caption>
+                <thead>
+                  <tr><th>India</th><th>US</th><th>UK</th><th>EU</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>S</td><td>4</td><td>8</td><td>36</td></tr>
+                  <tr><td>M</td><td>6</td><td>10</td><td>38</td></tr>
+                  <tr><td>L</td><td>8</td><td>12</td><td>40</td></tr>
+                  <tr><td>XL</td><td>10</td><td>14</td><td>42</td></tr>
+                  <tr><td>XXL</td><td>12</td><td>16</td><td>44</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="measure-note" style="font-size:.85rem; color:#514c43;">Between two sizes? Go up a size for suits and cord sets, and keep nightsuits closer to your everyday size for a relaxed fit.</p>
+
+            <div class="fit-help">
+              <div>
+                <h4>Still unsure?</h4>
+                <p>Send us your bust, waist and hip measurements and we'll recommend a size within the hour — no guesswork.</p>
+              </div>
+              <a href="https://wa.me/910000000000" class="btn ghost-dark">Message us on WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / PROFILE -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>About the house</h2>
+        <p>The short version, for anywhere you list us online.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>Modern Villa is a women's ready-to-wear showroom built around one idea: festive doesn't have to mean uncomfortable, and comfortable doesn't have to mean plain. We stock three lines — suits for traditional functions, nightsuits for home, and cord sets for the days in between — and every piece is finished and ready to wear off the rack.</p>
+          <p>We work directly with our tailoring floor, so sizing stays consistent from the first piece you buy to the fiftieth, and we can turn around custom lengths and repeat orders quickly.</p>
+          <p>Everything from grading the size chart to choosing this season's cuts happens in-house, which is also why we're comfortable standing behind fit and finish on every order.</p>
+        </div>
+
+        <div class="profile-card">
+          <h3>Seller profile</h3>
+          <p style="font-size:.92rem; color:var(--stone); margin-bottom:1.2rem;">Copy this for marketplace and social storefronts.</p>
+          <dl>
+            <dt>Business name</dt>
+            <dd>Modern Villa</dd>
+          </dl>
+          <hr class="rule">
+          <dl>
+            <dt>Category</dt>
+            <dd>Women's ready-to-wear — traditional suits, nightsuits, cord sets</dd>
+          </dl>
+          <hr class="rule">
+          <dl>
+            <dt>What we offer</dt>
+            <dd>Ready-made, pre-stitched pieces in sizes S–XXL, with fabric and colour options that refresh each season</dd>
+          </dl>
+          <hr class="rule">
+          <dl>
+            <dt>Why shop with us</dt>
+            <dd>In-house tailoring, consistent sizing, and same-week dispatch on in-stock pieces</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECOND QUOTE -->
+  <div class="quote-inline">
+    <div class="wrap">
+      <blockquote>Every fold has a story. Every stitch, a season.</blockquote>
+      <div class="rule-line"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M9 46V27C9 16.5066 17.5066 8 28 8H32C42.4934 8 51 16.5066 51 27V46" stroke="#f7f4ee" stroke-width="1.4"/>
+          <line x1="9" y1="46" x2="51" y2="46" stroke="#f7f4ee" stroke-width="1.4"/>
+          <text x="30" y="40" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="19" fill="#f7f4ee">MV</text>
+        </svg>
+        <p>Ready-to-wear suits, nightsuits and cord sets for women — cut in-house, finished for everyday wear.</p>
+      </div>
+
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li style="color:var(--stone);">Modern Villa Showroom</li>
+          <li style="color:var(--stone);">Radaur, Haryana, India</li>
+          <li style="color:var(--stone);">Open daily, 10am – 8pm</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Reach us</h4>
+        <ul>
+          <li><strong style="color:var(--ink);">Contact: Yash Chopra</strong></li>
+          <li>Radaur, Haryana, India</li>
+          <li><a href="mailto:hello@modernvilla.in">hello@modernvilla.in</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Stay in the loop</h4>
+        <p style="font-size:.9rem; color:var(--stone); margin-bottom:1rem;">New arrivals and festive drops, no spam.</p>
+        <form class="newsletter" onsubmit="event.preventDefault(); this.reset();">
+          <label for="newsletter-email" class="sr-only" style="position:absolute; left:-9999px;">Email address</label>
+          <input id="newsletter-email" type="email" placeholder="Your email" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="bottom-row">
+      <span>&copy; 2026 Modern Villa. All rights reserved. &nbsp; • &nbsp; Fashion imagery shown as Unsplash inspiration.</span>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f7f4ee" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f7f4ee" stroke-width="1.4"><path d="M15 8h-2a2 2 0 0 0-2 2v10M9 13h4"/><path d="M8 2h8a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6V8a6 6 0 0 1 6-6Z"/></svg>
+        </a>
+        <a href="#" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f7f4ee" stroke-width="1.4"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l1.9-5.6A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navList.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navList.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navList.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+  /* ---------- SHOPPING CART + FILTERS ---------- */
+  const productGrid = document.getElementById('productGrid');
+  const productCards = [...document.querySelectorAll('.product-card')];
+  const productSearch = document.getElementById('productSearch');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const shopCount = document.getElementById('shopCount');
+  const emptyState = document.getElementById('emptyState');
+
+  function refreshUnsplashEmbeds(){ if(window.PinUtils && PinUtils.build){ PinUtils.build(); } }
+
+  function filterProducts(){
+    const term = productSearch.value.toLowerCase().trim();
+    const cat = categoryFilter.value;
+    let visible = 0;
+
+    productCards.forEach(card => {
+      const matchesText = card.dataset.name.includes(term);
+      const matchesCat = cat === 'all' || card.dataset.category.includes(cat);
+      const show = matchesText && matchesCat;
+      card.style.display = show ? '' : 'block';
+      if(show) visible++;
+    });
+
+    shopCount.textContent = `${visible} ${visible === 1 ? 'piece' : 'pieces'}`;
+    emptyState.style.display = visible ? 'none' : 'block';
+    refreshUnsplashEmbeds();
+  }
+  productSearch.addEventListener('input', filterProducts);
+  categoryFilter.addEventListener('change', filterProducts);
+
+  const cart = [];
+  const cartPanel = document.getElementById('cartPanel');
+  const cartBackdrop = document.getElementById('cartBackdrop');
+  const cartItems = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+  const cartCount = document.getElementById('cartCount');
+
+  function money(n){ return `₹${n.toLocaleString('en-IN')}`; }
+
+  function renderCart(){
+    cartCount.textContent = cart.length;
+    if(!cart.length){
+      cartItems.innerHTML = '<div class="cart-empty">Your bag is empty.<br>Find something you love.</div>';
+      cartTotal.textContent = '₹0';
+      return;
+    }
+
+    let total = 0;
+    cartItems.innerHTML = cart.map((item,index)=>{
+      total += item.price;
+      return `<div class="cart-item">
+        <div><strong>${item.name}</strong><small>${money(item.price)}</small></div>
+        <button class="cart-remove" data-index="${index}">Remove</button>
+      </div>`;
+    }).join('');
+    cartTotal.textContent = money(total);
+
+    cartItems.querySelectorAll('.cart-remove').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        cart.splice(Number(btn.dataset.index),1);
+        renderCart();
+      });
+    });
+  }
+
+  function openCart(){
+    cartPanel.classList.add('open');
+    cartBackdrop.classList.add('open');
+  }
+  function closeCart(){
+    cartPanel.classList.remove('open');
+    cartBackdrop.classList.remove('open');
+  }
+
+  document.querySelectorAll('.add-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      cart.push({name:btn.dataset.product,price:Number(btn.dataset.price)});
+      renderCart();
+      openCart();
+    });
+  });
+
+  document.querySelectorAll('.wish-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
+      btn.setAttribute('aria-pressed', btn.textContent === '♥');
+    });
+  });
+
+  document.getElementById('cartTrigger').addEventListener('click', openCart);
+  document.getElementById('cartClose').addEventListener('click', closeCart);
+  cartBackdrop.addEventListener('click', closeCart);
+  document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+    if(!cart.length){
+      alert('Your shopping bag is empty.');
+      return;
+    }
+    alert('Demo checkout: connect this button to your payment/checkout system.');
+  });
+
+  renderCart();
+
+</script>
+
+</body>
+</html>
